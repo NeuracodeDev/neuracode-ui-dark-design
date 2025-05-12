@@ -55,15 +55,15 @@
   }
   
   h1 {
-    @apply text-2xl;
+    @apply text-2xl tracking-tight;
   }
   
   h2 {
-    @apply text-xl;
+    @apply text-xl tracking-tight;
   }
   
   h3 {
-    @apply text-lg;
+    @apply text-lg tracking-tight;
   }
 
   p {

@@ -24,7 +24,7 @@ const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
           <div className="text-primary/80">
             {icon}
           </div>
-          <h3 className="text-sm font-medium">{title}</h3>
+          <h3 className="text-sm font-medium tracking-tight">{title}</h3>
         </div>
         <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{description}</p>
         

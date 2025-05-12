@@ -59,7 +59,7 @@ const Dashboard: React.FC = () => {
 
             <section className="mb-10">
               <div className="mb-4">
-                <h2 className="text-lg font-medium">Quick Actions</h2>
+                <h2 className="text-lg font-medium tracking-tight">Quick Actions</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -77,14 +77,14 @@ const Dashboard: React.FC = () => {
             
             <section className="mb-8">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-medium">Get Started</h2>
+                <h2 className="text-lg font-medium tracking-tight">Get Started</h2>
               </div>
               
               <div className="rounded-lg border border-border/50 bg-card/50 p-4 hover:neon-border transition-all duration-300">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-medium text-sm mb-1.5">Getting started with NeuraCode</h3>
-                    <p className="text-muted-foreground text-sm">
+                    <h3 className="font-medium text-sm mb-1.5 tracking-tight">Getting started with NeuraCode</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       Learn how to create your first AI project and navigate the NeuraCode IDE features.
                     </p>
                   </div>
