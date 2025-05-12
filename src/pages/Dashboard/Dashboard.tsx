@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Plus, BarChart3, Cpu, ChevronRight } from 'lucide-react';
+import { Plus, BarChart3 } from 'lucide-react';
 import { SidebarProvider, SidebarInset, SidebarRail } from '@/components/ui/sidebar';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
@@ -20,12 +19,6 @@ const quickTasks = [
     title: 'Run Data Profiler',
     icon: <BarChart3 className="h-5 w-5" />,
     description: 'Analyze your datasets to identify patterns and anomalies.'
-  },
-  {
-    id: '4',
-    title: 'Deploy a Model',
-    icon: <Cpu className="h-5 w-5" />,
-    description: 'Deploy your trained models to production environments.'
   }
 ];
 
@@ -39,9 +32,6 @@ const Dashboard: React.FC = () => {
         break;
       case '3':
         navigate('/dashboard/datasets');
-        break;
-      case '4':
-        navigate('/dashboard/models');
         break;
       default:
         break;
