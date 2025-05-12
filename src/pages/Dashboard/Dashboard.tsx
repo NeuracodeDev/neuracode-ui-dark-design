@@ -77,11 +77,11 @@ const Dashboard: React.FC = () => {
           <Topbar />
           
           <div className="p-6 overflow-auto h-[calc(100vh-32px)]">
-            <div className="mb-6">
+            <div className="mb-8">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <h1 className="text-2xl font-bold">Welcome back, John!</h1>
                 <div className="flex gap-3 mt-4 md:mt-0">
-                  <Button>
+                  <Button className="animate-pulse-blue">
                     <Plus className="mr-2 h-4 w-4" />
                     New Project
                   </Button>
@@ -134,7 +134,7 @@ const Dashboard: React.FC = () => {
                 <Button variant="link">View all</Button>
               </div>
               
-              <div className="rounded-lg border border-border bg-card p-4">
+              <div className="rounded-lg border border-border bg-card p-4 hover:neon-border transition-all duration-300">
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-medium">Getting started with NeuraCode</h3>

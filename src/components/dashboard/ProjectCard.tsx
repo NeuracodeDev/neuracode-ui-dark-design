@@ -20,9 +20,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   onClick
 }) => {
   return (
-    <Card className="overflow-hidden hover:border-primary/30 transition-all">
+    <Card className="overflow-hidden hover:neon-border transition-all">
       <CardContent className="p-0">
-        <div className="h-3 bg-primary w-full" />
+        <div className="h-1 bg-primary w-full opacity-80" />
         <div className="p-4">
           <h3 className="font-semibold text-lg truncate">{name}</h3>
           <p className="text-muted-foreground text-sm line-clamp-2 h-10">{description}</p>

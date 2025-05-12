@@ -67,6 +67,8 @@ export default {
           green: '#2E7D32',
           slate: '#0F1117',
           surface: '#161920',
+          blue: '#1E3A8A',
+          neon: '#3b82f6',
         }
 			},
 			borderRadius: {
@@ -93,17 +95,26 @@ export default {
 				},
         'glow': {
           '0%, 100%': {
-            boxShadow: '0 0 5px 1px rgba(46, 125, 50, 0.4)'
+            boxShadow: '0 0 5px 1px rgba(59, 130, 246, 0.4)'
           },
           '50%': {
-            boxShadow: '0 0 15px 3px rgba(46, 125, 50, 0.7)'
+            boxShadow: '0 0 15px 3px rgba(59, 130, 246, 0.7)'
+          }
+        },
+        'pulse-blue': {
+          '0%, 100%': {
+            opacity: 0.85
+          },
+          '50%': {
+            opacity: 1
           }
         }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-        'glow': 'glow 2s ease-in-out infinite'
+        'glow': 'glow 2s ease-in-out infinite',
+        'pulse-blue': 'pulse-blue 3s ease-in-out infinite'
 			},
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

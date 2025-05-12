@@ -18,7 +18,7 @@ const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
   onClick
 }) => {
   return (
-    <Card className="overflow-hidden hover:scale-[1.02] transition-all">
+    <Card className="overflow-hidden hover:neon-border transition-all">
       <CardContent className="p-4">
         <div className="flex items-center gap-3 mb-3">
           <div className="text-primary">
