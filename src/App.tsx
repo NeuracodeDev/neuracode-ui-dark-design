@@ -31,7 +31,7 @@ const App = () => (
           <Route path="/dashboard/datasets" element={<Datasets />} />
           <Route path="/dashboard/models" element={<Models />} />
           <Route path="/dashboard/settings" element={<Settings />} />
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
