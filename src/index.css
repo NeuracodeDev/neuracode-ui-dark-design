@@ -14,16 +14,18 @@
     --popover: 220 26% 18%;
     --popover-foreground: 220 13% 95%;
 
-    --primary: 216 100% 68%;
+    /* Updated primary color to a brighter cyan */
+    --primary: 192 85% 65%;
     --primary-foreground: 220 13% 95%;
 
+    /* Softer secondary accent */
     --secondary: 220 16% 22%;
     --secondary-foreground: 220 13% 95%;
 
     --muted: 220 16% 22%;
     --muted-foreground: 220 10% 65%;
 
-    --accent: 220 16% 22%;
+    --accent: 192 30% 30%;
     --accent-foreground: 220 13% 95%;
 
     --destructive: 0 62.8% 60.6%;
@@ -31,7 +33,7 @@
 
     --border: 220 16% 24%;
     --input: 220 16% 24%;
-    --ring: 216 45% 60%;
+    --ring: 192 85% 55%;
 
     --radius: 0.375rem;
   }
@@ -49,21 +51,26 @@
     line-height: 1.5;
   }
   
+  /* Updated typography scale */
   h1, h2, h3, h4, h5, h6 {
     @apply font-medium tracking-tighter;
     line-height: 1.2;
   }
   
   h1 {
-    @apply text-2xl;
+    @apply text-3xl; /* 32px */
   }
   
   h2 {
-    @apply text-xl;
+    @apply text-2xl; /* 24px */
   }
   
   h3 {
-    @apply text-lg;
+    @apply text-xl; /* 20px */
+  }
+  
+  h4 {
+    @apply text-lg; /* 18px */
   }
 
   p {
@@ -110,7 +117,7 @@
 
 @layer utilities {
   .neon-border {
-    @apply border border-primary/30 shadow-[0_0_3px_rgba(56,139,253,0.15)];
+    @apply border border-primary/30 shadow-[0_0_6px_rgba(85,195,228,0.25)];
   }
   
   .neon-text {
@@ -122,7 +129,7 @@
   }
   
   .card-hover {
-    @apply transition-all duration-150 hover:border-border hover:shadow-md;
+    @apply transition-all duration-200 hover:shadow-md hover:translate-y-[-2px];
   }
 
   .activity-dot {
@@ -151,5 +158,23 @@
   
   .scrollbar-thin::-webkit-scrollbar-thumb {
     @apply bg-border rounded-full;
+  }
+
+  /* Improved micro-interactions */
+  .btn-ripple {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-ripple::after {
+    @apply content-[''] absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300;
+  }
+  
+  .btn-ripple:active::after {
+    @apply opacity-100;
+  }
+
+  /* Refined card styles */
+  .quick-action-card {
+    @apply h-full transition-all duration-200 hover:translate-y-[-2px] hover:shadow-lg;
   }
 }

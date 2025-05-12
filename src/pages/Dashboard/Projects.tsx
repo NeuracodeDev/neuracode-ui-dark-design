@@ -6,6 +6,8 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
 import ProjectCard from '@/components/dashboard/ProjectCard';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { toast } from '@/components/ui/use-toast';
 
 const projects = [
   {
@@ -53,6 +55,36 @@ const projects = [
 ];
 
 const Projects: React.FC = () => {
+  const navigate = useNavigate();
+  
+  const handleNewProject = () => {
+    navigate('/dashboard/create');
+    toast({
+      title: "New Project",
+      description: "Creating a new AI project"
+    });
+  };
+  
+  const handleImportProject = () => {
+    toast({
+      title: "Import Project",
+      description: "Opening project import wizard"
+    });
+    // Here you would typically open an import modal or navigate to import page
+  };
+  
+  const handleProjectClick = (projectId: string) => {
+    const project = projects.find(p => p.id === projectId);
+    if (project) {
+      toast({
+        title: "Opening Project",
+        description: `Loading ${project.name}`
+      });
+      // Here you would navigate to the project details page
+      console.log(`Open project ${projectId}`);
+    }
+  };
+  
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full bg-background dark">
@@ -62,19 +94,26 @@ const Projects: React.FC = () => {
         <SidebarInset>
           <Topbar projectName="Projects" />
           
-          <div className="p-6 overflow-auto h-[calc(100vh-32px)]">
-            <div className="mb-6">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div className="p-8 overflow-auto h-[calc(100vh-32px)] scrollbar-thin">
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                 <div>
-                  <h1 className="text-2xl font-bold">Projects</h1>
+                  <h1 className="text-2xl font-semibold tracking-tight mb-2">Projects</h1>
                   <p className="text-muted-foreground">Manage your AI projects</p>
                 </div>
                 <div className="flex gap-3 mt-4 md:mt-0">
-                  <Button className="animate-pulse-blue">
+                  <Button 
+                    className="shadow-sm hover:shadow-md transition-shadow btn-ripple"
+                    onClick={handleNewProject}
+                  >
                     <Plus className="mr-2 h-4 w-4" />
                     New Project
                   </Button>
-                  <Button variant="outline">
+                  <Button 
+                    variant="outline" 
+                    className="hover:border-primary/30 hover:text-primary transition-colors"
+                    onClick={handleImportProject}
+                  >
                     <FolderOpen className="mr-2 h-4 w-4" />
                     Import Project
                   </Button>
@@ -82,7 +121,7 @@ const Projects: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project) => (
                 <ProjectCard
                   key={project.id}
@@ -90,7 +129,7 @@ const Projects: React.FC = () => {
                   description={project.description}
                   updatedAt={project.updatedAt}
                   language={project.language}
-                  onClick={() => console.log(`Open project ${project.id}`)}
+                  onClick={() => handleProjectClick(project.id)}
                 />
               ))}
             </div>

@@ -7,6 +7,7 @@ import Topbar from '@/components/dashboard/Topbar';
 import QuickTaskCard from '@/components/dashboard/QuickTaskCard';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "@/components/ui/use-toast";
 
 const quickTasks = [
   {
@@ -30,13 +31,28 @@ const Dashboard: React.FC = () => {
     switch(taskId) {
       case '1':
         navigate('/dashboard/create');
+        toast({
+          title: "Creating new project",
+          description: "Navigating to project creation"
+        });
         break;
       case '3':
         navigate('/dashboard/datasets');
+        toast({
+          title: "Data Profiler",
+          description: "Opening dataset analysis tools"
+        });
         break;
       default:
         break;
     }
+  };
+  
+  const handleReadMoreClick = () => {
+    toast({
+      title: "Documentation",
+      description: "Opening NeuraCode documentation"
+    });
   };
   
   return (
@@ -48,15 +64,15 @@ const Dashboard: React.FC = () => {
         <SidebarInset>
           <Topbar />
           
-          <div className="p-6 overflow-y-auto h-[calc(100vh-32px)] scrollbar-thin">
+          <div className="p-8 overflow-y-auto h-[calc(100vh-32px)] scrollbar-thin">
             <div className="mb-8 mt-2">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <h1 className="font-medium">Welcome to NeuraCode</h1>
+                <h1 className="font-medium text-2xl tracking-tight">Welcome to NeuraCode</h1>
                 <div className="flex gap-3 mt-4 md:mt-0">
                   <Button 
                     variant="default" 
                     size="sm" 
-                    className="shadow-sm"
+                    className="shadow-sm btn-ripple"
                     onClick={() => navigate('/dashboard/create')}
                   >
                     <Plus className="mr-2 h-4 w-4" />
@@ -67,14 +83,14 @@ const Dashboard: React.FC = () => {
             </div>
 
             <section className="mb-8">
-              <div className="mb-4">
-                <h2 className="text-base font-medium flex items-center">
-                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+              <div className="mb-6">
+                <h2 className="text-lg font-medium flex items-center">
+                  <span className="w-1 h-5 bg-primary mr-2 rounded-full"></span>
                   Quick Actions
                 </h2>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {quickTasks.map((task) => (
                   <QuickTaskCard
                     key={task.id}
@@ -88,22 +104,22 @@ const Dashboard: React.FC = () => {
             </section>
             
             <section className="mb-8">
-              <div className="flex items-center mb-4">
-                <h2 className="text-base font-medium flex items-center">
-                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+              <div className="flex items-center mb-6">
+                <h2 className="text-lg font-medium flex items-center">
+                  <span className="w-1 h-5 bg-primary mr-2 rounded-full"></span>
                   Get Started
                 </h2>
               </div>
               
-              <div className="rounded-md border border-border/40 bg-card/80 p-4 hover:border-primary/30 transition-all duration-200">
+              <div className="rounded-md border border-border/40 bg-card/80 p-6 hover:border-primary/30 hover:shadow-md transition-all duration-200">
                 <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-medium text-sm mb-2">Getting started with NeuraCode</h3>
+                  <div className="max-w-2xl">
+                    <h3 className="font-medium text-base mb-2">Getting started with NeuraCode</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
-                      Learn how to create your first AI project and navigate the NeuraCode IDE features.
+                      Learn how to create your first AI project and navigate the NeuraCode IDE features. Our comprehensive guides will help you get up to speed with all the essential tools and workflows.
                     </p>
                   </div>
-                  <Button variant="secondary" size="sm" className="gap-1">
+                  <Button variant="secondary" size="sm" className="gap-1 btn-ripple" onClick={handleReadMoreClick}>
                     Read more
                     <ChevronRight className="h-3.5 w-3.5" />
                   </Button>
@@ -112,16 +128,25 @@ const Dashboard: React.FC = () => {
             </section>
 
             <section>
-              <div className="flex items-center mb-4">
-                <h2 className="text-base font-medium flex items-center">
-                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+              <div className="flex items-center mb-6">
+                <h2 className="text-lg font-medium flex items-center">
+                  <span className="w-1 h-5 bg-primary mr-2 rounded-full"></span>
                   Recent Activity
                 </h2>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex items-center p-3 rounded-md border border-border/40 bg-card/50 hover:border-border transition-all duration-200">
+                  <div 
+                    key={i} 
+                    className="flex items-center p-4 rounded-md border border-border/40 bg-card/50 hover:border-primary/20 transition-all duration-200 hover:shadow-sm"
+                    onClick={() => {
+                      toast({
+                        title: "Activity",
+                        description: `Viewing activity details for item ${i}`
+                      });
+                    }}
+                  >
                     <div className="activity-dot active mr-3"></div>
                     <div>
                       <p className="text-sm font-medium">Project updated</p>
