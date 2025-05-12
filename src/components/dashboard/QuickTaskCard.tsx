@@ -19,12 +19,12 @@ const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
   onClick
 }) => {
   return (
-    <Card className="border-border/40 bg-card hover:border-primary/30 transition-all duration-200 overflow-hidden shadow-md hover:shadow-lg h-[160px] flex flex-col">
-      <div className="h-1 bg-primary/70 w-full"></div>
+    <Card className="border-border/40 bg-card hover:border-primary/30 transition-all duration-300 overflow-hidden shadow-md hover:shadow-lg h-[160px] flex flex-col hover:translate-y-[-2px]">
+      <div className="h-1 bg-primary/80 w-full"></div>
       <CardContent className="p-4 flex flex-col flex-grow justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2.5">
-            <div className="text-primary">
+            <div className="text-primary p-1.5 rounded-md bg-primary/10">
               {icon}
             </div>
             <h3 className="text-sm font-medium">{title}</h3>
@@ -39,11 +39,11 @@ const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-xs gap-1 h-7 px-2 hover:bg-primary/10 hover:text-primary btn-ripple" 
+                  className="text-xs gap-1 h-7 px-2 hover:bg-primary/15 hover:text-primary btn-ripple group" 
                   onClick={onClick}
                 >
                   Start
-                  <ArrowRight className="h-3 w-3" />
+                  <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="bottom">
