@@ -132,6 +132,20 @@ const RentCompute: React.FC = () => {
     }
   };
   
+  // Format date to display in yyyy-MM-dd format if there is a date
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "As soon as possible";
+    
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
+  
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full bg-background dark">
@@ -365,7 +379,7 @@ const RentCompute: React.FC = () => {
                         
                         <div className="text-sm text-muted-foreground flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5" />
-                          {startDate ? new Date(startDate).toLocaleString() : "As soon as possible"}
+                          {formatDate(startDate)}
                         </div>
                       </div>
                     </div>
