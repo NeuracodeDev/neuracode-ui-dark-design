@@ -37,32 +37,32 @@
   }
 
   .dark {
-    --background: 222 47% 11%; /* #121e3a - dark blue background */
+    --background: 224 40% 10%; /* Darker blue background */
     --foreground: 210 40% 98%;
 
-    --card: 223 47% 14%; /* #172442 - darker blue surface */
+    --card: 224 40% 12%; /* Slightly lighter blue surface */
     --card-foreground: 210 40% 98%;
 
-    --popover: 223 47% 14%;
+    --popover: 224 40% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 221 83% 53%; /* #3b82f6 - blue accent */
+    --primary: 217 91% 60%; /* #3b82f6 - blue accent */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 222 47% 18%;
+    --secondary: 224 40% 16%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 222 47% 18%;
+    --muted: 224 40% 16%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 222 47% 18%;
+    --accent: 224 40% 16%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 223 47% 20%;
-    --input: 223 47% 20%;
+    --border: 224 40% 18%;
+    --input: 224 40% 18%;
     --ring: 224 76% 48%;
   }
 }
@@ -75,6 +75,23 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    letter-spacing: -0.025em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+  
+  h1 {
+    @apply text-2xl;
+  }
+  
+  h2 {
+    @apply text-xl;
+  }
+  
+  h3 {
+    @apply text-lg;
   }
 }
 
@@ -112,11 +129,11 @@
 
 @layer utilities {
   .neon-border {
-    @apply border border-primary/60 shadow-[0_0_10px_rgba(59,130,246,0.5)];
+    @apply border border-primary/20 shadow-[0_0_10px_rgba(59,130,246,0.15)];
   }
   
   .neon-text {
-    @apply text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.5)];
+    @apply text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.25)];
   }
   
   .glass-panel {
