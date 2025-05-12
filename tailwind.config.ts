@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,7 +54,7 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
+					DEFAULT: 'hsl(228, 13%, 9%)', /* #161920 - dark surface */
 					foreground: 'hsl(var(--sidebar-foreground))',
 					primary: 'hsl(var(--sidebar-primary))',
 					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
@@ -61,7 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				neuracode: {
+          green: '#2E7D32',
+          slate: '#0F1117',
+          surface: '#161920',
+        }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,12 +90,29 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+        'glow': {
+          '0%, 100%': {
+            boxShadow: '0 0 5px 1px rgba(46, 125, 50, 0.4)'
+          },
+          '50%': {
+            boxShadow: '0 0 15px 3px rgba(46, 125, 50, 0.7)'
+          }
+        }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+        'glow': 'glow 2s ease-in-out infinite'
+			},
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      spacing: {
+        sidebar: '240px',
+        topbar: '32px'
+      }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
