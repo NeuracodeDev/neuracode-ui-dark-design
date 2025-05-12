@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User, ChevronLeft } from 'lucide-react';
+import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User, ChevronLeft, Calculator, Server } from 'lucide-react';
 import { 
   Sidebar as ShadcnSidebar,
   SidebarContent,
@@ -36,6 +36,16 @@ const sidebarItems = [
     icon: Cpu,
     label: 'Models',
     path: '/dashboard/models',
+  },
+  {
+    icon: Calculator,
+    label: 'Calculate Compute',
+    path: '/dashboard/calculate-compute',
+  },
+  {
+    icon: Server,
+    label: 'Rent Compute',
+    path: '/dashboard/rent-compute',
   },
   {
     icon: Settings,

@@ -12,6 +12,8 @@ import Projects from "./pages/Dashboard/Projects";
 import Datasets from "./pages/Dashboard/Datasets";
 import Models from "./pages/Dashboard/Models";
 import Settings from "./pages/Dashboard/Settings";
+import CalculateCompute from "./pages/Dashboard/CalculateCompute";
+import RentCompute from "./pages/Dashboard/RentCompute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/dashboard/projects" element={<Projects />} />
           <Route path="/dashboard/datasets" element={<Datasets />} />
           <Route path="/dashboard/models" element={<Models />} />
+          <Route path="/dashboard/calculate-compute" element={<CalculateCompute />} />
+          <Route path="/dashboard/rent-compute" element={<RentCompute />} />
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<NotFound />} />
