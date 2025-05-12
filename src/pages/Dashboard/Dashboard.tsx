@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { Plus, FileCode2, BarChart3, Cpu, ChevronRight } from 'lucide-react';
+import { Plus, BarChart3, Cpu, ChevronRight } from 'lucide-react';
 import { SidebarProvider, SidebarInset, SidebarRail } from '@/components/ui/sidebar';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
 import QuickTaskCard from '@/components/dashboard/QuickTaskCard';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const quickTasks = [
   {
@@ -13,12 +14,6 @@ const quickTasks = [
     title: 'Create New Project',
     icon: <Plus className="h-5 w-5" />,
     description: 'Start a new AI project with templates or from scratch.'
-  },
-  {
-    id: '2',
-    title: 'Fine-tune a Model',
-    icon: <FileCode2 className="h-5 w-5" />,
-    description: 'Fine-tune pretrained models on your custom datasets.'
   },
   {
     id: '3',
@@ -35,6 +30,24 @@ const quickTasks = [
 ];
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
+  
+  const handleTaskClick = (taskId: string) => {
+    switch(taskId) {
+      case '1':
+        navigate('/dashboard/create');
+        break;
+      case '3':
+        navigate('/dashboard/datasets');
+        break;
+      case '4':
+        navigate('/dashboard/models');
+        break;
+      default:
+        break;
+    }
+  };
+  
   return (
     <SidebarProvider>
       <div className="flex h-screen w-full bg-background dark">
@@ -49,7 +62,12 @@ const Dashboard: React.FC = () => {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <h1 className="font-medium">Welcome to NeuraCode</h1>
                 <div className="flex gap-3 mt-4 md:mt-0">
-                  <Button variant="default" size="sm" className="shadow-sm">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="shadow-sm"
+                    onClick={() => navigate('/dashboard/create')}
+                  >
                     <Plus className="mr-2 h-4 w-4" />
                     New Project
                   </Button>
@@ -65,14 +83,14 @@ const Dashboard: React.FC = () => {
                 </h2>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {quickTasks.map((task) => (
                   <QuickTaskCard
                     key={task.id}
                     title={task.title}
                     icon={task.icon}
                     description={task.description}
-                    onClick={() => console.log(`Start task ${task.id}`)}
+                    onClick={() => handleTaskClick(task.id)}
                   />
                 ))}
               </div>

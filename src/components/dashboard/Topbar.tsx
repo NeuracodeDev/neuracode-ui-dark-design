@@ -3,6 +3,7 @@ import React from 'react';
 import { Menu, Search, Bell, User, GitBranch, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from "@/components/ui/use-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,12 +13,38 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { useNavigate } from 'react-router-dom';
 
 interface TopbarProps {
   projectName?: string;
 }
 
 const Topbar: React.FC<TopbarProps> = ({ projectName = "NeuraCode" }) => {
+  const navigate = useNavigate();
+  
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const searchInput = (e.target as HTMLFormElement).querySelector('input');
+    if (searchInput && searchInput.value) {
+      toast({
+        title: "Search",
+        description: `Searching for "${searchInput.value}"...`,
+      });
+      searchInput.value = '';
+    }
+  };
+
+  const handleNotificationsClick = () => {
+    toast({
+      title: "Notifications",
+      description: "You have no new notifications",
+    });
+  };
+
+  const handleSettingsClick = () => {
+    navigate('/dashboard/settings');
+  };
+
   return (
     <header className="h-topbar border-b border-border flex items-center justify-between px-3 bg-card/30 backdrop-blur-sm">
       <div className="flex items-center gap-2">
@@ -43,19 +70,29 @@ const Topbar: React.FC<TopbarProps> = ({ projectName = "NeuraCode" }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="hidden md:flex relative w-64">
+        <form onSubmit={handleSearch} className="hidden md:flex relative w-64">
           <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
           <Input
             placeholder="Search..."
             className="pl-8 h-7 bg-secondary py-1 text-xs focus-visible:ring-primary/30"
           />
-        </div>
+        </form>
 
-        <Button variant="ghost" size="icon" className="h-7 w-7">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-7 w-7"
+          onClick={handleNotificationsClick}
+        >
           <Bell className="h-3.5 w-3.5" />
         </Button>
         
-        <Button variant="ghost" size="icon" className="h-7 w-7">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-7 w-7"
+          onClick={handleSettingsClick}
+        >
           <Settings className="h-3.5 w-3.5" />
         </Button>
         
@@ -68,10 +105,10 @@ const Topbar: React.FC<TopbarProps> = ({ projectName = "NeuraCode" }) => {
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuLabel className="text-xs font-normal">My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-xs">Profile</DropdownMenuItem>
-            <DropdownMenuItem className="text-xs">Settings</DropdownMenuItem>
+            <DropdownMenuItem className="text-xs" onClick={() => toast({ title: "Profile", description: "Profile settings opened" })}>Profile</DropdownMenuItem>
+            <DropdownMenuItem className="text-xs" onClick={() => navigate('/dashboard/settings')}>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive text-xs">Log out</DropdownMenuItem>
+            <DropdownMenuItem className="text-destructive text-xs" onClick={() => navigate('/login')}>Log out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

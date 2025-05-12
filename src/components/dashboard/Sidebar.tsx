@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User, FileCode } from 'lucide-react';
+import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User } from 'lucide-react';
 import { 
   Sidebar as ShadcnSidebar,
   SidebarContent,
@@ -12,7 +12,6 @@ import {
   SidebarMenuButton
 } from '@/components/ui/sidebar';
 import Logo from '@/components/Logo';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const sidebarItems = [
   {
@@ -24,11 +23,6 @@ const sidebarItems = [
     icon: FolderOpen,
     label: 'Projects',
     path: '/dashboard/projects',
-  },
-  {
-    icon: FileCode,
-    label: 'Code',
-    path: '/dashboard/code',
   },
   {
     icon: BarChart3,
