@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Plus, BarChart3 } from 'lucide-react';
+import { Plus, BarChart3, ChevronRight } from 'lucide-react';
 import { SidebarProvider, SidebarInset, SidebarRail } from '@/components/ui/sidebar';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
