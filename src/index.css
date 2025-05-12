@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,16 +45,17 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight;
-    letter-spacing: -0.02em;
+    @apply font-medium;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
   }
   
   h1 {
-    @apply text-2xl font-medium;
+    @apply text-2xl;
   }
   
   h2 {
@@ -66,6 +68,7 @@
 
   p {
     line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -103,11 +106,11 @@
 
 @layer utilities {
   .neon-border {
-    @apply border border-primary/15 shadow-[0_0_8px_rgba(59,130,246,0.1)];
+    @apply border border-primary/15 shadow-[0_0_5px_rgba(59,130,246,0.1)];
   }
   
   .neon-text {
-    @apply text-primary drop-shadow-[0_0_5px_rgba(59,130,246,0.2)];
+    @apply text-primary drop-shadow-[0_0_3px_rgba(59,130,246,0.2)];
   }
   
   .glass-panel {
@@ -115,6 +118,6 @@
   }
   
   .card-hover {
-    @apply transition-all duration-200 hover:translate-y-[-2px] hover:shadow-md;
+    @apply transition-all duration-200 hover:translate-y-[-1px] hover:shadow-sm;
   }
 }
