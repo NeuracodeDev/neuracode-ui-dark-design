@@ -18,18 +18,23 @@ const QuickTaskCard: React.FC<QuickTaskCardProps> = ({
   onClick
 }) => {
   return (
-    <Card className="card-hover border border-border/50 overflow-hidden">
+    <Card className="border-border/40 bg-card hover:border-primary/30 transition-all duration-200 overflow-hidden">
       <CardContent className="p-4">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-3 mb-2.5">
           <div className="text-primary/80">
             {icon}
           </div>
-          <h3 className="text-sm font-medium tracking-tight">{title}</h3>
+          <h3 className="text-sm font-medium">{title}</h3>
         </div>
-        <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{description}</p>
+        <p className="text-xs text-muted-foreground mb-4 line-clamp-2 leading-relaxed">{description}</p>
         
         <div className="flex justify-end">
-          <Button variant="ghost" size="sm" className="text-xs gap-1 h-7 px-2" onClick={onClick}>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-xs gap-1 h-7 px-2 hover:bg-primary/10 hover:text-primary" 
+            onClick={onClick}
+          >
             Start
             <ArrowRight className="h-3 w-3" />
           </Button>

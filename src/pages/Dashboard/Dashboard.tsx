@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Plus, FileCode2, BarChart3, Cpu } from 'lucide-react';
+import { Plus, FileCode2, BarChart3, Cpu, ChevronRight } from 'lucide-react';
 import { SidebarProvider, SidebarInset, SidebarRail } from '@/components/ui/sidebar';
 import Sidebar from '@/components/dashboard/Sidebar';
 import Topbar from '@/components/dashboard/Topbar';
@@ -44,12 +44,12 @@ const Dashboard: React.FC = () => {
         <SidebarInset>
           <Topbar />
           
-          <div className="p-6 overflow-auto h-[calc(100vh-32px)]">
-            <div className="mb-10 mt-4">
+          <div className="p-6 overflow-y-auto h-[calc(100vh-32px)] scrollbar-thin">
+            <div className="mb-8 mt-2">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <h1 className="font-medium tracking-tight">Welcome back</h1>
+                <h1 className="font-medium">Welcome to NeuraCode</h1>
                 <div className="flex gap-3 mt-4 md:mt-0">
-                  <Button variant="default" size="sm">
+                  <Button variant="default" size="sm" className="shadow-sm">
                     <Plus className="mr-2 h-4 w-4" />
                     New Project
                   </Button>
@@ -57,9 +57,12 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <section className="mb-10">
+            <section className="mb-8">
               <div className="mb-4">
-                <h2 className="text-lg font-medium tracking-tight">Quick Actions</h2>
+                <h2 className="text-base font-medium flex items-center">
+                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+                  Quick Actions
+                </h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -76,20 +79,47 @@ const Dashboard: React.FC = () => {
             </section>
             
             <section className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-medium tracking-tight">Get Started</h2>
+              <div className="flex items-center mb-4">
+                <h2 className="text-base font-medium flex items-center">
+                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+                  Get Started
+                </h2>
               </div>
               
-              <div className="rounded-lg border border-border/50 bg-card/50 p-4 hover:neon-border transition-all duration-300">
+              <div className="rounded-md border border-border/40 bg-card/80 p-4 hover:border-primary/30 transition-all duration-200">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-medium text-sm mb-1.5 tracking-tight">Getting started with NeuraCode</h3>
+                    <h3 className="font-medium text-sm mb-2">Getting started with NeuraCode</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       Learn how to create your first AI project and navigate the NeuraCode IDE features.
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">Read more</Button>
+                  <Button variant="secondary" size="sm" className="gap-1">
+                    Read more
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </Button>
                 </div>
+              </div>
+            </section>
+
+            <section>
+              <div className="flex items-center mb-4">
+                <h2 className="text-base font-medium flex items-center">
+                  <span className="w-1 h-4 bg-primary mr-2 rounded-full"></span>
+                  Recent Activity
+                </h2>
+              </div>
+              
+              <div className="space-y-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex items-center p-3 rounded-md border border-border/40 bg-card/50 hover:border-border transition-all duration-200">
+                    <div className="activity-dot active mr-3"></div>
+                    <div>
+                      <p className="text-sm font-medium">Project updated</p>
+                      <p className="text-xs text-muted-foreground">Text Classification Model - {i} hour{i > 1 ? 's' : ''} ago</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           </div>

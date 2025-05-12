@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User } from 'lucide-react';
+import { Plus, FolderOpen, BarChart3, Cpu, Settings, HelpCircle, User, FileCode } from 'lucide-react';
 import { 
   Sidebar as ShadcnSidebar,
   SidebarContent,
@@ -22,17 +22,22 @@ const sidebarItems = [
   },
   {
     icon: FolderOpen,
-    label: 'Load Project',
+    label: 'Projects',
     path: '/dashboard/projects',
   },
   {
+    icon: FileCode,
+    label: 'Code',
+    path: '/dashboard/code',
+  },
+  {
     icon: BarChart3,
-    label: 'Manage Datasets',
+    label: 'Datasets',
     path: '/dashboard/datasets',
   },
   {
     icon: Cpu,
-    label: 'Manage Models',
+    label: 'Models',
     path: '/dashboard/models',
   },
   {
@@ -47,8 +52,8 @@ const Sidebar = () => {
   
   return (
     <ShadcnSidebar variant="sidebar">
-      <SidebarHeader className="py-4">
-        <div className="px-4">
+      <SidebarHeader className="py-2">
+        <div className="px-3">
           <Logo />
         </div>
       </SidebarHeader>
@@ -61,10 +66,11 @@ const Sidebar = () => {
                 asChild
                 isActive={location.pathname === item.path}
                 tooltip={item.label}
+                className={location.pathname === item.path ? "border-l-2 border-primary bg-secondary/60" : ""}
               >
                 <Link to={item.path}>
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
+                  <item.icon className="h-[18px] w-[18px]" />
+                  <span className="text-sm">{item.label}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -72,13 +78,13 @@ const Sidebar = () => {
         </SidebarMenu>
       </SidebarContent>
       
-      <SidebarFooter className="pb-4">
+      <SidebarFooter className="pb-2">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Help">
               <Link to="/help">
-                <HelpCircle className="h-5 w-5" />
-                <span>Help</span>
+                <HelpCircle className="h-[18px] w-[18px]" />
+                <span className="text-sm">Help</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -86,8 +92,8 @@ const Sidebar = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Profile">
               <Link to="/profile">
-                <User className="h-5 w-5" />
-                <span>Profile</span>
+                <User className="h-[18px] w-[18px]" />
+                <span className="text-sm">Profile</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

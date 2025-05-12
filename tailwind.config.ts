@@ -13,7 +13,7 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: '1rem',
 			screens: {
 				'2xl': '1400px'
 			}
@@ -54,7 +54,7 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sidebar: {
-					DEFAULT: 'hsl(228, 13%, 9%)', /* #161920 - dark surface */
+					DEFAULT: 'hsl(220, 26%, 14%)', 
 					foreground: 'hsl(var(--sidebar-foreground))',
 					primary: 'hsl(var(--sidebar-primary))',
 					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
@@ -65,16 +65,17 @@ export default {
 				},
 				neuracode: {
           green: '#2E7D32',
-          slate: '#0F1117',
-          surface: '#161920',
-          blue: '#1E3A8A',
-          neon: '#3b82f6',
+          slate: '#1E1E1E',  // VS Code default background color 
+          surface: '#252526', // VS Code editor surface
+          blue: '#007ACC',   // VS Code blue accent
+          neon: '#388BFD',   // VS Code accent blue
+          inactive: '#8E8E8E' // VS Code inactive text
         }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				md: 'calc(var(--radius) - 1px)',
+				sm: 'calc(var(--radius) - 2px)'
 			},
 			keyframes: {
 				'accordion-down': {
@@ -95,15 +96,15 @@ export default {
 				},
         'glow': {
           '0%, 100%': {
-            boxShadow: '0 0 5px 1px rgba(59, 130, 246, 0.4)'
+            boxShadow: '0 0 4px 1px rgba(56, 139, 253, 0.3)'
           },
           '50%': {
-            boxShadow: '0 0 15px 3px rgba(59, 130, 246, 0.7)'
+            boxShadow: '0 0 8px 2px rgba(56, 139, 253, 0.5)'
           }
         },
         'pulse-blue': {
           '0%, 100%': {
-            opacity: 0.85
+            opacity: 0.9
           },
           '50%': {
             opacity: 1
@@ -114,15 +115,19 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
         'glow': 'glow 2s ease-in-out infinite',
-        'pulse-blue': 'pulse-blue 3s ease-in-out infinite'
+        'pulse-blue': 'pulse-blue 2s ease-in-out infinite'
 			},
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace']
       },
       spacing: {
         sidebar: '240px',
         topbar: '32px'
+      },
+      boxShadow: {
+        'vs': '0 2px 4px rgba(0,0,0,0.15)',
+        'vs-hover': '0 4px 8px rgba(0,0,0,0.2)'
       }
 		}
 	},
