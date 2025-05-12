@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { SidebarProvider, SidebarInset, SidebarRail } from '@/components/ui/sidebar';
 import Sidebar from '@/components/dashboard/Sidebar';
@@ -7,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
-import { Calculator, Info, PlusCircle, Cpu } from 'lucide-react';
+import { Calculator, Info, PlusCircle, Cpu, GaugeCircle } from 'lucide-react';
 import { 
   Select, 
   SelectContent, 
@@ -19,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
+import { Badge } from '@/components/ui/badge';
 
 interface Pricing {
   gpuType: string;
@@ -34,6 +34,26 @@ const pricingData: Pricing[] = [
   { gpuType: 'H100', hourlyRate: 3.50, monthlyRate: 1600, dailyRate: 70 },
 ];
 
+// Model capability estimates for different GPU types
+const modelCapabilities = {
+  'RTX 4090': [
+    { type: 'Training', models: ['3B parameters', '7B fine-tuning'], complexity: 'medium' },
+    { type: 'Inference', models: ['7B models', '13B with quantization'], complexity: 'high' },
+  ],
+  'A100-40GB': [
+    { type: 'Training', models: ['7B parameters', '13B fine-tuning'], complexity: 'high' },
+    { type: 'Inference', models: ['13B models', '70B with quantization'], complexity: 'high' },
+  ],
+  'A100-80GB': [
+    { type: 'Training', models: ['13B parameters', '70B fine-tuning'], complexity: 'very-high' },
+    { type: 'Inference', models: ['70B models', '175B with quantization'], complexity: 'very-high' },
+  ],
+  'H100': [
+    { type: 'Training', models: ['70B parameters', '175B fine-tuning'], complexity: 'extreme' },
+    { type: 'Inference', models: ['175B models', '540B with quantization'], complexity: 'extreme' },
+  ],
+};
+
 const CalculateCompute: React.FC = () => {
   const [gpuCount, setGpuCount] = useState<number>(1);
   const [selectedGpu, setSelectedGpu] = useState<string>("RTX 4090");
@@ -42,6 +62,7 @@ const CalculateCompute: React.FC = () => {
   const [includeMaintenance, setIncludeMaintenance] = useState<boolean>(true);
   
   const selectedPricing = pricingData.find(p => p.gpuType === selectedGpu) || pricingData[0];
+  const selectedCapabilities = modelCapabilities[selectedGpu as keyof typeof modelCapabilities] || [];
   
   const calculateTotalCost = () => {
     const time = parseInt(computeTime) || 0;
@@ -68,6 +89,18 @@ const CalculateCompute: React.FC = () => {
       title: "Compute Cost Calculated",
       description: `Estimated cost: $${calculateTotalCost()} for ${computeTime} ${timeUnit} of ${gpuCount} ${selectedGpu} GPU(s)`,
     });
+  };
+  
+  // Get complexity color based on complexity level
+  const getComplexityColor = (complexity: string) => {
+    switch(complexity) {
+      case 'low': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
+      case 'medium': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
+      case 'high': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300';
+      case 'very-high': return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300';
+      case 'extreme': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
+      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800/30 dark:text-gray-300';
+    }
   };
   
   return (
@@ -288,6 +321,70 @@ const CalculateCompute: React.FC = () => {
                   </CardFooter>
                 </Card>
               </div>
+            </div>
+            
+            {/* Model Capability Estimate Section */}
+            <div className="mt-8">
+              <Card className="border-border/40 bg-card shadow-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <GaugeCircle className="h-5 w-5 text-primary" />
+                    Estimated Model Capabilities
+                  </CardTitle>
+                  <CardDescription>
+                    What you can train and run with {gpuCount} x {selectedGpu} GPU(s)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {selectedCapabilities.map((capability, index) => (
+                      <div key={index} className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-2 h-2 rounded-full ${
+                            capability.type === 'Training' ? 'bg-primary' : 'bg-secondary'
+                          }`} />
+                          <h3 className="font-medium text-sm">{capability.type}</h3>
+                          <Badge 
+                            variant="secondary"
+                            className={`ml-auto text-xs ${getComplexityColor(capability.complexity)}`}
+                          >
+                            {capability.complexity.charAt(0).toUpperCase() + capability.complexity.slice(1)}
+                          </Badge>
+                        </div>
+                        
+                        <div className="pl-4 border-l-2 border-border/50 space-y-2">
+                          {capability.models.map((model, modelIdx) => (
+                            <div key={modelIdx} className="flex items-center text-sm">
+                              <span className="text-muted-foreground">{model}</span>
+                              {gpuCount > 1 && <span className="text-xs text-primary ml-2">{capability.type === 'Training' ? `(${gpuCount}x faster)` : ''}</span>}
+                            </div>
+                          ))}
+                          
+                          <div className="pt-1 text-xs text-muted-foreground">
+                            {capability.type === 'Training' ? (
+                              <span>Scales approximately linearly with {gpuCount} GPU{gpuCount > 1 ? 's' : ''}</span>
+                            ) : (
+                              <span>Multiple GPUs can serve more inference requests in parallel</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-6 p-3 bg-secondary/30 rounded-md border border-border/50">
+                    <div className="flex items-start gap-2">
+                      <Info className="h-4 w-4 text-muted-foreground mt-0.5" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">
+                          These estimates are based on standard configurations and may vary depending on specific 
+                          model architectures, batch sizes, precision settings, and optimization techniques.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
             
             <div className="mt-8">
